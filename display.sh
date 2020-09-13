@@ -1,0 +1,10 @@
+#!/bin/bash
+
+POSSIBILLITIES=( "$@" )
+POSSIBILLITIES=( $POSSIBILLITIES )
+COUNTER=0
+for POS in "${POSSIBILLITIES[@]}"
+do
+	echo "$POS [$COUNTER]"
+	COUNTER=$(($COUNTER +1))
+done
