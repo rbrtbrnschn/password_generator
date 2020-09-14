@@ -1,5 +1,11 @@
 # Password Generator
 
+Why Use This Password Generator?
+- single command
+- copies to clipboard
+- saves to local file (pass, use_case, timestamp)
+- base64 encryption
+
 ## Installation
 
 ```bash
@@ -11,11 +17,15 @@ chmod +x install.sh
 
 ## Usage
 
-`pass-gen [-sql]`
+```bash
+pass-gen [-sql]
+```
 
-- [-s] : creates a single password
-- [-q] : removes the necessity of inputing a USE_CASE
-- [-l] : changes password length to the given argument (ie. pass-gen -l 10)
+> **[-s]** : creates a single password
+
+> **[-q]** : removes the necessity of inputing a USE_CASE
+
+> **[-l]** : changes password length to the given argument (ie. pass-gen -l 10)
 
 
 ### todo-list
