@@ -19,11 +19,12 @@ chmod +x install.sh
 
 
 ### todo-list
-[x] ask for use case (ie. facebook.com)
-[x] save password
-[x] save according timestamp
-[x] setup flags for ./index.sh
-[x] allowing execution anywhere
-[x] auto installation and uninstall scripts
-[x] write how to install guide
+
+* [X] ask for use case (ie. facebook.com)
+* [x] save password
+* [x] save according timestamp
+* [x] setup flags for ./index.sh
+* [x] allowing execution anywhere
+* [x] auto installation and uninstall scripts
+* [x] write how to install guide
 
