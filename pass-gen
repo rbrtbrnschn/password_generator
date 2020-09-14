@@ -1,0 +1,83 @@
+#!/bin/bash
+# Executable Located @ "/usr/local/bin"
+# Source Folder Located @ "/usr/local/bin/password_generator"
+
+SRC="/usr/local/bin/password_generator"
+SEQ_LEN=5
+MAX_CHAR=25
+IS_CHOOSING=1
+NEEDS_USE_CASE=1
+
+# check where this folder is located in bin or not
+# change SrC accordingly
+
+PWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+if [ ! $PWD == "/usr/local/bin" ]
+then
+	echo "USING LOCAL VERSION | PLEASE USE 'pass-gen'"
+	SRC="."
+fi
+
+
+while getopts "qsl:" OPTION; do
+case $OPTION in
+	q )
+		NEEDS_USE_CASE=0
+		;;
+	s )
+		SEQ_LEN=1
+		;;
+	l )
+		MAX_CHAR=$OPTARG
+		;;
+	\? )
+		echo "Correct Usage: ./index.sh [-s] [SINGLE] [-q] [NEEDS_USE_CASE] [-l] [MAX_CHAR]"
+		exit 1
+		;;
+esac
+done
+
+PASSWORDS=$($SRC/create.sh -x $SEQ_LEN -l $MAX_CHAR)
+PASSWORDS_ARR=( $PASSWORDS )
+# TODO Reassigning PASSWORDS to ( self )
+# does not work
+
+# No Need To Choose
+if [ "${#PASSWORDS_ARR[@]}" == 1 ]
+then
+	IS_CHOOSING=0
+fi
+
+if [ "$IS_CHOOSING" == 0 ]
+then
+	SELECTED=$($SRC/select.sh -a "${PASSWORDS[@]}" -i 0)
+	$SRC/copy.sh $SELECTED
+	if [ "$NEEDS_USE_CASE" == 1 ]
+	then
+		USE_CASE=$($SRC/use_case.sh)
+		$SRC/save.sh $SELECTED $USE_CASE
+		$SRC/message.sh
+		exit 0
+	fi
+	$SRC/save.sh $SELECTED
+	$SRC/message.sh
+	exit 0
+fi
+	
+$SRC/display.sh "${PASSWORDS[@]}"
+echo "----------------------------"
+read -p "choosing #" INDEX
+SELECTED=$($SRC/select.sh -a "${PASSWORDS[@]}" -i $INDEX)
+
+if [ "$NEEDS_USE_CASE" == 0 ]
+then
+	$SRC/copy.sh
+	$SRC/save.sh $SELECTED
+	$SRC/message.sh
+else
+	USE_CASE=$($SRC/use_case.sh)
+	$SRC/copy.sh $SELECTED
+	$SRC/save.sh $SELECTED $USE_CASE
+	$SRC/message.sh
+fi
+exit 0
