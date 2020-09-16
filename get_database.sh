@@ -1,6 +1,5 @@
 #!/bin/bash
-
 if [ -f ".env" ]; then
 	export $(cat .env | sed 's/#.*//g' | xargs)
 fi
-echo "$PATH_TO_DATABASE"
+echo $(cat /usr/local/bin/password_generator/path_to_database)
