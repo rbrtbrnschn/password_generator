@@ -23,6 +23,7 @@ function remove_installation {
 	sudo rm -rf /usr/local/bin/password_generator/
 	sudo rm -rf /usr/local/bin/pass-gen
 	sudo rm -rf /usr/local/bin/database.csv
+	sudo rm -rf /usr/local/bin/.database.csv
 	echo "uninstall complete"
 }
 
