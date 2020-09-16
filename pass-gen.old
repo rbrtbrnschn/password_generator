@@ -7,6 +7,7 @@ SEQ_LEN=5
 MAX_CHAR=25
 IS_CHOOSING=1
 NEEDS_USE_CASE=1
+
 # check where this folder is located in bin or not
 # change SrC accordingly
 
@@ -17,14 +18,6 @@ then
 	SRC="."
 fi
 
-DATABASE=$($SRC/get_database.sh)
-# Check if USE_CASE was set, if not, set it
-function set_use_case {
-	if [ ! "$USE_CASE" ]
-	then
-		USE_CASE="<UNK>"
-	fi	
-}
 
 while getopts "qsl:" OPTION; do
 case $OPTION in
@@ -62,12 +55,11 @@ then
 	if [ "$NEEDS_USE_CASE" == 1 ]
 	then
 		USE_CASE=$($SRC/use_case.sh)
-		set_use_case
-		$SRC/save.sh -p $SELECTED -u $USE_CASE -d $DATABASE
+		$SRC/save.sh $SELECTED $USE_CASE
 		$SRC/message.sh
 		exit 0
 	fi
-	$SRC/save.sh -p $SELECTED -n -d $DATABASE
+	$SRC/save.sh $SELECTED
 	$SRC/message.sh
 	exit 0
 fi
@@ -80,13 +72,12 @@ SELECTED=$($SRC/select.sh -a "${PASSWORDS[@]}" -i $INDEX)
 if [ "$NEEDS_USE_CASE" == 0 ]
 then
 	$SRC/copy.sh
-	$SRC/save.sh -p $SELECTED -n -d $DATABASE
+	$SRC/save.sh $SELECTED
 	$SRC/message.sh
 else
 	USE_CASE=$($SRC/use_case.sh)
-	set_use_case
 	$SRC/copy.sh $SELECTED
-	$SRC/save.sh -p $SELECTED -u $USE_CASE -d $DATABASE
+	$SRC/save.sh $SELECTED $USE_CASE
 	$SRC/message.sh
 fi
 exit 0

@@ -1,7 +1,13 @@
 #!/bin/bash
-USE_CASE="<UNK>"
+PASS=$1 || "<UNK>"
+USE_CASE=$2 || "<UNK>"
 TIME=$(date +%s%N)
 PATH_TO_DB="database.csv"
+
+if [ ! "$2" ]
+then
+	USE_CASE="<UNK>"
+fi
 
 while getopts "u:p:nd:" OPTION; do
 case $OPTION in
@@ -10,6 +16,7 @@ case $OPTION in
 		PATH_TO_DB=$OPTARG
 		;;
 	u )
+		# Use Case
 		USE_CASE=$OPTARG
 		;;
 	p )
