@@ -18,7 +18,6 @@ then
 fi
 
 DATABASE=$($SRC/get_database.sh)
-read -p "db: $DATASBE, src: $SRC" A
 # Check if USE_CASE was set, if not, set it
 function set_use_case {
 	if [ ! "$USE_CASE" ]
@@ -65,8 +64,6 @@ then
 	then
 		USE_CASE=$($SRC/use_case.sh)
 		set_use_case
-		echo "$SELECTED,$USE_CASE,$DATABASE"
-		read -p "src: $SRC" A
 		$SRC/save.sh -p $SELECTED -u $USE_CASE -d $DATABASE
 		$SRC/message.sh
 		exit 0
