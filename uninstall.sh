@@ -14,7 +14,7 @@ function remove_dir {
 			;;
 		*)
 			echo "Please answer with y/yes or n/no"
-			./uninstall.sh
+			remove_dir
 			;;
 	esac
 }
