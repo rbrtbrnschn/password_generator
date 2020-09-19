@@ -30,7 +30,7 @@ pass-gen [-sql]
 
 ### todo-list
 
-* [X] ask for use case (ie. facebook.com)
+- [ ] ask for use case (ie. facebook.com)
 * [x] save password
 * [x] save according timestamp
 * [x] setup flags for ./index.sh
