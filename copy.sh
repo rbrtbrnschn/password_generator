@@ -4,4 +4,4 @@
 #-------------------#
 
 TEXT="${!#}"
-echo "$TEXT" | xclip -sel clip
+echo "$TEXT" | xclip -sel clip || clear && echo "password: ${TEXT}"
