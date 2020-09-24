@@ -1,4 +1,4 @@
-# Password Generator
+# Password Generator | Taylor
 
 Why Use This Password Generator?
 - single command
